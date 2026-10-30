@@ -1,0 +1,373 @@
+/* =====================================================================
+   style.css — SEMUA TAMPILAN (warna, font, jarak, ukuran)
+   =====================================================================
+   CARA CEPAT MENGUBAH TAMPILAN:
+   → Edit bagian "1. VARIABEL" di bawah. Mengubah satu variabel
+     otomatis mengubah seluruh website.
+
+   DAFTAR ISI:
+     1. Variabel (warna, font, jarak)  ← mulai dari sini
+     2. Mode gelap
+     3. Dasar (body, link, gambar, judul)
+     4. Header & navigasi
+     5. Halaman Home
+     6. Halaman Materials, About, Collaborate
+     7. Halaman detail produk
+     8. Tombol, kotak beli, keranjang, notifikasi
+     9. Animasi
+    10. Tampilan desktop (layar lebar)
+   ===================================================================== */
+
+
+/* =====================================================================
+   1. VARIABEL  —  EDIT DI SINI
+   ===================================================================== */
+:root {
+  /* Warna (mode terang) */
+  --bg:   #ebe9e3;   /* warna latar halaman */
+  --fg:   #1c1c1b;   /* warna teks utama & tombol */
+  --mut:  #76746d;   /* warna teks redup (keterangan) */
+  --line: #cbc9c1;   /* warna garis tipis & bingkai */
+
+  /* Font (nama font harus sama dengan yang dimuat di index.html) */
+  --sans: 'Inter Tight', Helvetica, Arial, sans-serif;            /* teks biasa */
+  --head: 'Archivo', 'Inter Tight', Helvetica, Arial, sans-serif; /* logo & judul halaman */
+
+  /* Jarak kiri-kanan halaman (HP). Di desktop otomatis diganti, lihat bagian 10. */
+  --gutter: 20px;
+
+  /* ---- Pengaturan area aman layar HP (notch). Jangan diubah. ---- */
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+
+/* =====================================================================
+   2. MODE GELAP
+   Otomatis aktif mengikuti pengaturan HP / komputer pengunjung.
+   Ubah warna di sini bila perlu (dua blok di bawah harus SAMA isinya).
+   ===================================================================== */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #161615; --fg: #e9e8e2; --mut: #8c8a83; --line: #33322f;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #161615; --fg: #e9e8e2; --mut: #8c8a83; --line: #33322f;
+}
+
+
+/* =====================================================================
+   3. DASAR
+   ===================================================================== */
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 400 14px/1.5 var(--sans);   /* ukuran teks dasar: 14px, tinggi baris: 1.5 */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Penutup area notch di atas layar HP (jangan dihapus) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  background: var(--bg);
+  z-index: 10;
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+h1 {
+  font-family: var(--head);
+  font-weight: 500;
+  font-size: clamp(32px, 6vw, 56px);   /* ukuran judul: min 32px, maks 56px */
+  letter-spacing: -.04em;
+  line-height: 1;
+  margin: 0 0 20px;
+}
+h3 { font-weight: 500; font-size: 13px; margin: 0 0 12px; }
+
+main { animation: fade-in .4s ease; min-height: 70vh; }
+
+.cap  { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--mut); }
+.mut  { color: var(--mut); }
+.link { border-bottom: 1px solid currentColor; }
+.note { color: var(--mut); font-size: 13px; margin: 12px 0 0; }
+
+
+/* =====================================================================
+   4. HEADER & NAVIGASI
+   ===================================================================== */
+header {
+  position: sticky;                         /* tetap di atas saat scroll */
+  top: env(safe-area-inset-top, 0px);
+  z-index: 9;
+  background: var(--bg);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 16px var(--gutter);
+}
+.logo { font-family: var(--head); font-weight: 600; font-size: 20px; letter-spacing: -.03em; }
+
+nav { display: flex; gap: 16px; }            /* jarak antar menu */
+nav a { color: var(--mut); transition: color .2s; }
+nav a:hover, nav a.on { color: var(--fg); }  /* menu aktif / disorot */
+
+
+/* =====================================================================
+   5. HALAMAN HOME
+   ===================================================================== */
+
+/* Tulisan besar di atas */
+.hero { padding: 48px var(--gutter) 20px; }
+.big {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: clamp(54px, 19vw, 300px);   /* ukuran tulisan besar: min 54px, maks 300px */
+  line-height: .82;
+  letter-spacing: -.06em;
+  margin: 0 0 16px -.04em;
+  overflow: hidden;
+  padding: .03em 0;
+}
+.ch { display: inline-block; animation: rise .9s cubic-bezier(.2,.7,.2,1) both; }
+.sub { margin: 0; color: var(--mut); font-size: 15px; }
+
+/* Kartu produk */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);   /* jumlah kolom di HP */
+  gap: 24px 10px;                          /* jarak baris, jarak kolom */
+  padding: 12px var(--gutter) 0;
+}
+.grid .card:nth-child(even) { margin-top: 48px; }   /* kartu genap turun sedikit (efek zig-zag). Hapus baris ini untuk rata. */
+.card { display: block; }
+.card .im { aspect-ratio: 9/16; overflow: hidden; }  /* bentuk foto kartu: lebar/tinggi. Ganti 1/1 untuk persegi */
+.card img { transition: transform .6s ease; }
+.card:hover img { transform: scale(1.04); }          /* efek zoom saat disorot */
+.card span { display: block; margin-top: 6px; font-size: 13px; }
+
+/* Judul bagian ("Materials", "Open to collaboration") */
+.sec {
+  display: flex;
+  justify-content: space-between;
+  padding: 56px var(--gutter) 12px;
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+/* Deretan material (bisa digeser ke samping) */
+.mats { display: flex; gap: 10px; overflow-x: auto; padding: 0 var(--gutter); scrollbar-width: none; }
+.mats > div { flex: 0 0 160px; }   /* lebar tiap kotak material di HP */
+.mats span { display: block; margin-top: 6px; font-size: 13px; }
+
+
+/* =====================================================================
+   6. HALAMAN MATERIALS, ABOUT, COLLABORATE
+   ===================================================================== */
+.mgrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px 10px;
+  padding: 12px var(--gutter) 0;
+}
+svg.sw { display: block; width: 100%; height: auto; }   /* kotak tekstur material */
+.mgrid span { display: block; margin-top: 6px; }
+
+.page { padding: 40px var(--gutter); max-width: 640px; }   /* lebar maksimal teks About/Collaborate */
+.page p { margin: 0 0 16px; }
+
+
+/* =====================================================================
+   7. HALAMAN DETAIL PRODUK
+   ===================================================================== */
+.dh {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 6px 20px;
+  flex-wrap: wrap;
+  padding: 12px var(--gutter) 0;
+}
+.dh h1 { margin: 0; }
+.dh p  { margin: 0; color: var(--mut); font-size: 13px; }
+
+.dw { display: grid; gap: 12px; padding: 16px var(--gutter) 0; }
+
+/* Slider foto */
+.sl { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.sl::-webkit-scrollbar { display: none; }
+.sd { flex: 0 0 100%; scroll-snap-align: center; }
+.sd img { width: 100%; height: auto; max-height: 82vh; object-fit: contain; }   /* tinggi foto maks 82% layar */
+.sd.soon {   /* kotak "Photo coming soon" */
+  display: grid; place-items: center; min-height: 260px;
+  border: 1px dashed var(--line); color: var(--mut); font-size: 13px;
+}
+
+/* Thumbnail kecil di bawah foto */
+.thumbs { display: flex; gap: 8px; margin-top: 8px; }
+.thumbs button {
+  all: unset; cursor: pointer;
+  flex: 0 0 56px; height: 56px;               /* ukuran thumbnail */
+  overflow: hidden; opacity: .5;
+  outline: 1px solid transparent;
+  transition: opacity .2s;
+}
+.thumbs button.on { opacity: 1; outline-color: var(--fg); }   /* thumbnail terpilih */
+.thumbs span {
+  display: grid; place-items: center; height: 100%;
+  border: 1px dashed var(--line); font-size: 10px; color: var(--mut);
+}
+
+/* Panel informasi (dimensi, spesifikasi, dst.) */
+.pn { display: grid; gap: 12px; }
+.panel { border: 1px solid var(--line); padding: 16px; }
+
+/* Tabel spesifikasi */
+.sp div { display: grid; grid-template-columns: 90px 1fr; gap: 12px; padding: 7px 0; border-top: 1px solid var(--line); }
+.sp div:first-child { border: 0; padding-top: 0; }
+.sp span:first-child { color: var(--mut); }
+
+/* Gambar diagram (dimensi & sketsa) — warna garis ikut tema */
+.dg { width: 100%; height: auto; display: block; }
+.dg path, .dg ellipse, .dg line, .dg polygon, .dg circle { stroke: var(--fg); fill: none; stroke-width: 1.2; }
+.dg .d { stroke: var(--mut); stroke-dasharray: 3 3; stroke-width: .8; }   /* garis putus-putus ukuran */
+.dg text { fill: var(--mut); font: 9px var(--sans); }
+
+/* Pilihan warna / material */
+.opt { display: flex; gap: 8px; }
+.opt div { flex: 1; font-size: 11px; color: var(--mut); text-align: center; }
+.opt i { display: block; height: 34px; margin-bottom: 4px; border: 1px solid var(--line); }
+
+/* Poin keunggulan */
+.feat { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.feat b { display: block; font-weight: 500; }
+.feat span { color: var(--mut); }
+
+.info p { margin: 0 0 16px; max-width: 28em; }                 /* produk sederhana */
+.nxt { display: flex; justify-content: space-between; padding: 32px var(--gutter) 0; }   /* link ← → */
+
+footer { display: flex; gap: 20px; flex-wrap: wrap; padding: 64px var(--gutter) 32px; color: var(--mut); }
+footer a:hover { color: var(--fg); }
+
+
+/* =====================================================================
+   8. TOMBOL, KOTAK BELI, KERANJANG, NOTIFIKASI
+   ===================================================================== */
+
+/* Kotak beli (dropdown + harga + tombol) */
+.buy { margin-top: 12px; display: grid; gap: 10px; }
+.buy label { display: grid; gap: 4px; font-size: 12px; color: var(--mut); }
+.buy select { font: inherit; color: var(--fg); background: transparent; border: 1px solid var(--line); padding: 9px; border-radius: 0; }
+.pr { font-size: 14px; }
+
+/* Tombol umum (Add to cart, Order by ...). Tambah  border-radius: 6px;  di bawah untuk sudut membulat. */
+.btn {
+  font: inherit; color: var(--fg); background: transparent;
+  border: 1px solid var(--fg); padding: 11px 16px; cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.btn:hover { background: var(--fg); color: var(--bg); }
+
+/* Tombol "Cart (n)" melayang di pojok kanan bawah */
+.pill {
+  position: fixed; right: 20px; bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  z-index: 15; display: none;
+  font: inherit; background: var(--fg); color: var(--bg);
+  border: 0; padding: 11px 18px; cursor: pointer;
+  animation: fade-in .4s ease;
+}
+
+/* Latar gelap saat keranjang terbuka */
+.ov {
+  position: fixed; inset: 0; background: rgba(0,0,0,.35);   /* .35 = tingkat gelap */
+  opacity: 0; pointer-events: none; transition: opacity .3s; z-index: 20;
+}
+.ov.on { opacity: 1; pointer-events: auto; }
+
+/* Laci keranjang (muncul dari kanan) */
+.dr {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  width: min(400px, 100%);                                   /* lebar laci: maks 400px */
+  background: var(--bg);
+  transform: translateX(100%);
+  transition: transform .4s cubic-bezier(.2,.7,.2,1);
+  z-index: 21; display: flex; flex-direction: column;
+  padding: calc(20px + env(safe-area-inset-top, 0px)) 20px calc(20px + env(safe-area-inset-bottom, 0px));
+}
+.dr.on { transform: none; }
+
+.dt { display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; }
+.dt button, .rm, .q button { all: unset; cursor: pointer; color: var(--mut); }
+.dt button:hover, .rm:hover, .q button:hover { color: var(--fg); }
+
+.di { flex: 1; overflow-y: auto; }
+.ci { display: grid; grid-template-columns: 56px 1fr auto; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); }
+.th { width: 56px; height: 70px; }          /* ukuran foto kecil di keranjang */
+.ci small { color: var(--mut); }
+.q { display: flex; gap: 12px; align-items: center; margin-top: 6px; }
+.q button { padding: 0 4px; }
+.df { display: grid; gap: 8px; padding-top: 12px; border-top: 1px solid var(--fg); }
+.tt { display: flex; justify-content: space-between; margin-bottom: 4px; }
+
+/* Notifikasi kecil */
+.toast {
+  position: fixed; left: 50%; bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  background: var(--fg); color: var(--bg);
+  padding: 10px 16px; z-index: 30; animation: fade-in .3s ease;
+}
+
+
+/* =====================================================================
+   9. ANIMASI
+   ===================================================================== */
+@keyframes fade-in { from { opacity: 0; } }
+@keyframes rise    { from { transform: translateY(105%); } }   /* huruf besar naik dari bawah */
+
+/* Elemen yang muncul pelan saat di-scroll (class "rv" dipasang oleh app.js) */
+.rv { opacity: 0; transform: translateY(18px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
+.rv.in { opacity: 1; transform: none; }
+
+/* Hormati pengguna yang mematikan animasi di perangkatnya.
+   Ingin MEMATIKAN semua animasi untuk semua orang? Hapus kondisi
+   "@media (prefers-reduced-motion: reduce)" dan sisakan isinya. */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  .rv { opacity: 1; transform: none; }
+}
+
+
+/* =====================================================================
+   10. TAMPILAN DESKTOP (layar lebar ≥ 860px)
+   Ubah 860px untuk menggeser titik pindah dari HP ke desktop.
+   ===================================================================== */
+@media (min-width: 860px) {
+  :root { --gutter: 36px; }               /* jarak kiri-kanan di desktop */
+
+  header { padding: 20px var(--gutter); }
+  .hero { padding-top: 56px; }
+  .page { padding: 60px var(--gutter); }
+  footer { padding: 80px var(--gutter) 36px; }
+
+  .grid  { grid-template-columns: repeat(4, 1fr); gap: 36px 16px; }    /* 4 kolom produk */
+  .mgrid { grid-template-columns: repeat(5, 1fr); gap: 36px 16px; }    /* 5 kolom material */
+  .mats > div { flex-basis: 220px; }
+
+  /* Halaman detail: foto di kiri (340px), info di kanan */
+  .dw { grid-template-columns: 340px 1fr; gap: 16px; align-items: start; }
+  .ph { position: sticky; top: 70px; }   /* foto tetap terlihat saat scroll */
+  .pn { grid-template-columns: 1fr 1fr; }
+  .pn .wide { grid-column: 1 / -1; }
+  .feat { grid-template-columns: repeat(4, 1fr); }
+}

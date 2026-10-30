@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!-- =====================================================================
+     index.html — KERANGKA HALAMAN
+     Isi teks, produk, kontak, harga → edit config.js (bukan file ini).
+     Judul tab, logo, dan footer diisi otomatis dari config.js.
+     ===================================================================== -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>FindMATA</title>
+
+  <!-- Font Google. Ganti font? Ubah nama font di link ini DAN variabel --sans / --head di style.css -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Archivo:wght@500;600&display=swap">
+
+  <!-- Semua tampilan (warna, ukuran, font) diatur di style.css -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- MENU ATAS.
+       Teks di antara > dan < boleh diganti (mis. "objects" → "shop").
+       Jangan ubah href dan data-n, karena dipakai oleh app.js. -->
+  <header>
+    <a class="logo" id="logo" href="#home">FindMATA</a>
+    <nav>
+      <a href="#home" data-n="home">objects</a>
+      <a href="#materials" data-n="materials">materials</a>
+      <a href="#about" data-n="about">about</a>
+      <a href="#collaboration" data-n="collab">collaborate</a>
+    </nav>
+  </header>
+
+  <!-- ISI HALAMAN: diisi otomatis oleh app.js, jangan dihapus -->
+  <main id="app"></main>
+
+  <!-- KERANJANG: diisi otomatis oleh app.js, jangan dihapus -->
+  <div class="ov" id="ov"></div>
+  <aside class="dr" id="dr" aria-label="Cart"></aside>
+  <button class="pill" id="pill"></button>
+
+  <!-- FOOTER: diisi otomatis dari config.js (email, Instagram, lokasi) -->
+  <footer id="footer"></footer>
+
+  <!-- URUTAN SCRIPT PENTING, jangan ditukar:
+       config.js (isi) → diagrams.js (gambar) → app.js (mesin) -->
+  <script src="config.js"></script>
+  <script src="diagrams.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
