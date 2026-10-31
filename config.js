@@ -258,7 +258,7 @@ const PRODUCTS = [
    --------------------------------------------------------------------- */
 const MATERIALS = [
   { name: 'Stainless steel',  color: '#b9bcbd', noise: '.002 .7', texture: null    },
-  { name: 'Burlap',           color: '#b79a68', noise: '.5',      texture: 'weave' },
+  { name: 'Natural jute fibre',           color: '#b79a68', noise: '.5',      texture: 'weave' },
   { name: '3D print',         color: '#d9d7d1', noise: '.8',      texture: 'layers'},
   { name: 'Fiberglass rods',  color: '#e5e2d9', noise: '.01 .4',  texture: 'rods'  },
   { name: 'Leather / reused', color: '#7a4b2c', noise: '.04',     texture: null    },
