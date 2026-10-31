@@ -149,7 +149,7 @@ const PRODUCTS = [
       ['Finish', 'Brushed / satin nickel'],
       ['Base',   'Round disc, brushed steel, weighted; hidden cable exit'],
       ['Arm',    'Overhead arc with short drop rod holding the shade'],
-      ['Shade',  'Conical, woven linen / canvas, off-white inner lining'],
+      ['Shade',  'Conical, woven linen or natural jute fabric, off-white inner lining'],
       ['Light',  'E27 warm-white LED, 2700 K, diffused downward'],
       ['Cable',  'Black cord with inline switch'],
     ],
