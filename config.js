@@ -156,11 +156,11 @@ const PRODUCTS = [
     sk: 'Bending sketch',
     ot: 'Shade options (custom)',
     op: [
-      ['Linen',          '#efebe4'],
-      ['Natural canvas', '#cdb08a'],
-      ['Olive fabric',   '#6f7c5a'],
-      ['Recycled paper', '#e8e2d6'],
+      ['Linen',              '#efebe4'],
+      ['Natural jute fibre', '#cdb08a'],
     ],
+
+
     on: 'Shade colour, size and shape can be customised; shade and bulb are replaceable.',
     ft: [
       ['Minimal design',     'Clean single-curve form, functional.'],
