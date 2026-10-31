@@ -112,6 +112,7 @@ const IMG = {
              keranjang punya harga.
      card  : kunci foto untuk kartu di home & keranjang (dari IMG di atas)
      ph    : daftar foto di halaman detail, mis. ['floor-lamp-1', 'floor-lamp-2'].
+     viewer: true → tambah slide "3D" (model bisa diputar) di galeri foto; saat ini hanya ada untuk Arc Floor Lamp.
              Kalau foto kurang dari 3, sisanya jadi slot "Photo coming soon".
      sub   : kalimat di bawah judul halaman detail
      dim   : kunci gambar dimensi (lihat diagrams.js: 'floor', 'pend', 'chair')
@@ -140,6 +141,7 @@ const PRODUCTS = [
     // price: 0,                       // ← aktifkan & isi angka rupiah untuk menampilkan harga
     card: 'floor-lamp-cover',
     ph: ['floor-lamp-1'],
+    viewer: true,   // slide "3D" di galeri foto (lihat viewer3d.js). Hapus baris ini untuk menyembunyikannya.
     sub: 'Slim S-curve stainless stem · conical linen shade · all dimensions approximate',
     dim: 'floor',
     sp: [

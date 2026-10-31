@@ -183,18 +183,21 @@ function detailPage(id) {
 
   /* ---- Galeri foto: foto produk + 2 slot kosong "coming soon" ----
      Ingin jumlah slot kosong berbeda? Ubah  [null, null]  (tiap null = 1 slot). */
-  const slides = [...p.ph, null, null];
+  // Produk dengan  viewer: true  mendapat satu slide "3D" (menggantikan 1 slot "coming soon", bukan foto)
+  const slides = p.viewer ? [...p.ph, '3d', null] : [...p.ph, null, null];
   const gallery = `
     <div class="ph">
       <div class="sl" id="sl">
-        ${slides.map(k => k
+        ${slides.map(k => k == '3d'
+          ? `<div class="sd v3d" id="v3d"></div>`
+          : k
           ? `<div class="sd">${img(k, p.n)}</div>`
           : `<div class="sd soon"><span>Photo coming soon</span></div>`).join('')}
       </div>
       <div class="thumbs">
         ${slides.map((k, j) => `
           <button data-i="${j}" class="${j ? '' : 'on'}" aria-label="Photo ${j + 1}">
-            ${k ? img(k) : '<span>Soon</span>'}
+            ${k == '3d' ? '<span class="t3">3D</span>' : k ? img(k) : '<span>Soon</span>'}
           </button>`).join('')}
       </div>
       ${buyBox}
@@ -400,6 +403,15 @@ function route() {
       const a = current();
       thumbs.forEach((t, j) => t.classList.toggle('on', j == a));
     };
+
+    // Slide 3D: model baru dimuat saat slide-nya terlihat (lihat viewer3d.js)
+    const v3d = document.getElementById('v3d');
+    if (v3d && window.initLamp3D) {
+      const once = new IntersectionObserver(es => {
+        if (es[0].isIntersecting) { once.disconnect(); initLamp3D(v3d); }
+      }, { threshold: .4 });
+      once.observe(v3d);
+    }
 
     // Tombol "Add to cart"
     const product = PRODUCTS.find(x => 'object-' + x.id == hash);

@@ -12,6 +12,7 @@ Website statis, tanpa build. Buka `index.html` di browser, atau upload folder in
 | Produk: nama, harga, spesifikasi, opsi warna                 | `config.js` (bagian 4) |
 | Material (Materials)                                         | `config.js` (bagian 5) |
 | Angka ukuran di gambar dimensi, sketsa                       | `diagrams.js`    |
+| Model 3D (slide "3D" di galeri) dan teks keterangannya      | `viewer3d.js`    |
 | Warna, font, jarak, jumlah kolom, ukuran                     | `style.css` (bagian 1 paling atas) |
 | Nama menu atas                                               | `index.html`     |
 | Cara kerja keranjang / halaman                               | `app.js`         |
@@ -42,6 +43,11 @@ lihat petunjuk "PRODUK SEDERHANA" di `config.js`.
 
 **Mengganti warna website** — ubah `--bg`, `--fg`, `--mut`, `--line` di
 bagian 1 `style.css` (dan versi mode gelapnya di bagian 2).
+
+**Slide 3D di galeri produk** — di `config.js`, tambah `viewer: true,` pada
+produk. Foto asli tetap ada; 3D hanya menjadi satu slide tambahan. Saat ini
+hanya Arc Floor Lamp yang punya modelnya. Teks keterangan ada di `VIEWS`
+dalam `viewer3d.js`.
 
 ## Aturan emas saat mengedit
 - Jangan hapus tanda kutip `'...'` atau koma `,` di akhir baris.
