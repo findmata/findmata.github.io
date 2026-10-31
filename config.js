@@ -145,7 +145,7 @@ const PRODUCTS = [
     sub: 'Slim S-curve stainless stem · conical linen shade · all dimensions approximate',
     dim: 'floor',
     sp: [
-      ['Stem',   'Stainless steel tube Ø 16 × 1 mm, one piece, smooth bend, no joints'],
+      ['Stem',   'Stainless steel tube Ø 12,7 × 1 mm, one piece, smooth bend, no joints'],
       ['Finish', 'Brushed / satin nickel'],
       ['Base',   'Round disc, brushed steel, weighted; hidden cable exit'],
       ['Arm',    'Overhead arc with short drop rod holding the shade'],
